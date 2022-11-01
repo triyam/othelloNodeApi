@@ -25,12 +25,15 @@ const userSchema = new mongoose.Schema({
   lastLogin: [
     {
       loginTime: {
-        type: Date,
+        type: Date
       },
       lastScore: {
-        type: Number,
+        type: Number
       }, 
       lastRank: {
+        type: Number
+      },
+      lastLevel: {
         type: Number
       }
     },
