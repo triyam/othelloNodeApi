@@ -141,7 +141,7 @@ router.get("/getLastRank/:id", async (req, res) => {
   }
 });
 
-router.post("/setLastScore", async (req, res) => {
+router.post("/setLastScore/:id", async (req, res) => {
   // Set the Last Score of player from user
   // It must be inside the
   //
@@ -150,9 +150,33 @@ router.post("/setLastScore", async (req, res) => {
   //         lastScore: <The Last Score>
   //     }
   // ]
+  const { lastScore } = req.body;
+  if (!lastScore) {
+    return res.status(422).json({ error: "Some data fields are missing" });
+  }
+  try {
+    User.updateOne(
+      { _id: req.params.id },
+      { "lastLogin.0.lastScore": lastScore },
+      function (err, userLastScore) {
+        if (err) {
+          console.log(err);
+          return res.status(501).json({ message: "Server issue" });
+        } else {
+          console.log("Updated Docs : ", userLastScore);
+          return res
+            .status(201)
+            .json({ message: "user Last Score Has been updated successfully" });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({ message: "Server issue" });
+  }
 });
 
-router.post("/setLastLevel", async (req, res) => {
+router.post("/setLastLevel/:id", async (req, res) => {
   // set the Last Level of player from user
   // It must be inside the
   //
@@ -161,6 +185,30 @@ router.post("/setLastLevel", async (req, res) => {
   //         lastLevel: <The Last Level>
   //     }
   // ]
+  const { lastLevel } = req.body;
+  if (!lastLevel) {
+    return res.status(422).json({ error: "Some data fields are missing" });
+  }
+  try {
+    User.updateOne(
+      { _id: req.params.id },
+      { "lastLogin.0.lastLevel": lastLevel },
+      function (err, userLastLevel) {
+        if (err) {
+          console.log(err);
+          return res.status(501).json({ message: "Server issue" });
+        } else {
+          console.log("Updated Docs : ", userLastLevel);
+          return res
+            .status(201)
+            .json({ message: "user Last Level Has been updated successfully" });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({ message: "Server issue" });
+  }
 });
 
 router.post("/setLastRank", async (req, res) => {
@@ -172,16 +220,112 @@ router.post("/setLastRank", async (req, res) => {
   //         lastRank: <The Last Rank>
   //     }
   // ]
+  const { lastRank } = req.body;
+  if (!lastRank) {
+    return res.status(422).json({ error: "Some data fields are missing" });
+  }
+  try {
+    User.updateOne(
+      { _id: req.params.id },
+      { "lastLogin.0.lastRank": lastRank },
+      function (err, userLastRank) {
+        if (err) {
+          console.log(err);
+          return res.status(501).json({ message: "Server issue" });
+        } else {
+          console.log("Updated Docs : ", userLastRank);
+          return res
+            .status(201)
+            .json({ message: "user Last Rank Has been updated successfully" });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({ message: "Server issue" });
+  }
 });
 
-router.post("/setHighestScore", async (req, res) => {
+router.post("/setHighestScore/:id", async (req, res) => {
   // Highest of all the score for each user in each time login
+  const { highScore } = req.body;
+  if (!highScore) {
+    return res.status(422).json({ error: "Some data fields are missing" });
+  }
+  try {
+    User.updateOne(
+      { _id: req.params.id },
+      { highScore },
+      function (err, userHighScore) {
+        if (err) {
+          console.log(err);
+          return res.status(501).json({ message: "Server issue" });
+        } else {
+          console.log("Updated Docs : ", userHighScore);
+          return res
+            .status(201)
+            .json({ message: "user High Score Has been updated successfully" });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({ message: "Server issue" });
+  }
 });
 
-router.post("/setHighestLevel", async (req, res) => {
+router.post("/setHighestLevel/:id", async (req, res) => {
   // Highest of all the Level for each user in each time login
+  const { highestLevel } = req.body;
+  if (!highestLevel) {
+    return res.status(422).json({ error: "Some data fields are missing" });
+  }
+  try {
+    User.updateOne(
+      { _id: req.params.id },
+      { highestLevel },
+      function (err, userHighestLevel) {
+        if (err) {
+          console.log(err);
+          return res.status(501).json({ message: "Server issue" });
+        } else {
+          console.log("Updated Docs : ", userHighestLevel);
+          return res.status(201).json({
+            message: "user Highest Level Has been updated successfully",
+          });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({ message: "Server issue" });
+  }
 });
 
-router.post("/setHighestRank", async (req, res) => {
+router.post("/setHighestRank/:id", async (req, res) => {
   // Highest of all the Rank for each user in each time login
+  const { highestRank } = req.body;
+  if (!highestRank) {
+    return res.status(422).json({ error: "Some data fields are missing" });
+  }
+  try {
+    User.updateOne(
+      { _id: req.params.id },
+      { highestRank },
+      function (err, userHighestRank) {
+        if (err) {
+          console.log(err);
+          return res.status(501).json({ message: "Server issue" });
+        } else {
+          console.log("Updated Docs : ", userHighestRank);
+          return res.status(201).json({
+            message: "user Highest Rank Has been updated successfully",
+          });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({ message: "Server issue" });
+  }
 });
